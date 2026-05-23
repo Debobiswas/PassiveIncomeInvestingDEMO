@@ -1,0 +1,34 @@
+# Dependencies
+robo-advisor/node_modules/
+
+# Build output
+robo-advisor/dist/
+
+# Vite cache
+robo-advisor/.vite/
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Logs
+*.log
+npm-debug.log*
