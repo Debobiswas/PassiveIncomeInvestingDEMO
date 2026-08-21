@@ -5,7 +5,8 @@
     "supabase": "^2.115.0"
   },
   "dependencies": {
-    "@supabase/ssr": "^0.12.4",
-    "@supabase/supabase-js": "^2.112.3"
+    "@supabase/supabase-js": "^2.112.3",
+    "snaptrade-typescript-sdk": "^12.1.8",
+    "xlsx": "^0.18.5"
   }
 }

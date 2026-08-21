@@ -37,3 +37,6 @@ npm-debug.log*
 # Worktrees (harness-managed, git-ignored scratch)
 .claude/worktrees/
 .superpowers/
+
+# Vercel
+.vercel/

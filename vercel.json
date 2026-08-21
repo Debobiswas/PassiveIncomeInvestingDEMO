@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd robo-advisor && npm install && npm run build",
+  "outputDirectory": "robo-advisor/dist",
+  "functions": { "api/**/*.js": { "runtime": "nodejs22.x" } },
+  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
+}
