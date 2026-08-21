@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
-import { Plus, Link2, RefreshCw, AlertCircle, ChevronRight, Calendar, Download,
+import { Plus, RefreshCw, AlertCircle, ChevronRight, Download,
          CheckCircle, ArrowRight, Upload, FileText, X } from 'lucide-react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { brokerageAccounts, portfolioHoldings, driftAlerts, rebalanceHistory,
          upcomingDates, recentActivity } from '../data/dummy';
 

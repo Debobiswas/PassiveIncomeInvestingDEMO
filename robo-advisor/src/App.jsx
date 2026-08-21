@@ -1,5 +1,5 @@
-import { useState, Suspense, lazy, useEffect } from 'react';
-import { TrendingUp, X, ArrowRight, Shield, Zap, BarChart2, Bell, Home as HomeIcon, Wallet, Search, Compass } from 'lucide-react';
+import { useState, Suspense, lazy } from 'react';
+import { TrendingUp, ArrowRight, Shield, Zap, BarChart2, Bell, Home as HomeIcon, Wallet, Search, Compass } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import NotificationsPanel from './components/NotificationsPanel';
 import { notifications } from './data/dummy';
@@ -101,19 +101,18 @@ function OnboardingModal({ onClose }) {
 export default function App() {
   const [active, setActive] = useState('home');
   const [notifOpen, setNotifOpen]       = useState(false);
-  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(
+    () => !sessionStorage.getItem('pw-onboarded')
+  );
   const View = views[active] || Home;
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
-  // Show onboarding once per session
-  useEffect(() => {
-    const seen = sessionStorage.getItem('pw-onboarded');
-    if (!seen) {
-      setShowOnboarding(true);
-      sessionStorage.setItem('pw-onboarded', '1');
-    }
-  }, []);
+  // Onboarding shows once per session; the flag is written on dismiss.
+  const dismissOnboarding = () => {
+    sessionStorage.setItem('pw-onboarded', '1');
+    setShowOnboarding(false);
+  };
 
   const handleNav = (view) => {
     setActive(view);
@@ -197,7 +196,7 @@ export default function App() {
       )}
 
       {/* Onboarding modal */}
-      {showOnboarding && <OnboardingModal onClose={() => setShowOnboarding(false)} />}
+      {showOnboarding && <OnboardingModal onClose={dismissOnboarding} />}
     </div>
   );
 }

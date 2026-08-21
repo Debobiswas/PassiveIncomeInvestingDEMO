@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import {
   Send, Bot, User, Target, Calculator, ChevronDown, RefreshCw,
-  AlertTriangle, TrendingDown, Zap, ChevronRight, CheckCircle2,
+  AlertTriangle, Zap, ChevronRight, CheckCircle2,
   Wand2, ArrowRight, Info,
 } from 'lucide-react';
 import { advisorMessages, goals, portfolioStats, samplePortfolios } from '../data/dummy';
 import {
-  AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  ReferenceLine, CartesianGrid, Legend,
+  AreaChart, Area, XAxis, Tooltip, ResponsiveContainer,
+  ReferenceLine, CartesianGrid,
 } from 'recharts';
 
 const C = { hi: 'var(--text-hi)', mid: 'var(--text-mid)', low: 'var(--text-low)', accent: 'var(--accent)', border: 'var(--border)', subtle: 'var(--bg-subtle)' };
