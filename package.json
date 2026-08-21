@@ -1,4 +1,6 @@
 {
+  "name": "passive-income-investing-demo",
+  "private": true,
   "devDependencies": {
     "supabase": "^2.115.0"
   },
