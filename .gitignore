@@ -33,3 +33,7 @@ __pycache__/
 # Logs
 *.log
 npm-debug.log*
+
+# Worktrees (harness-managed, git-ignored scratch)
+.claude/worktrees/
+.superpowers/
