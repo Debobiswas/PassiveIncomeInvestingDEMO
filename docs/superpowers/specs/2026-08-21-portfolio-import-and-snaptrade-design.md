@@ -210,7 +210,7 @@ holdings(
   symbol text not null,
   raw_symbol text,
   description text,
-  instrument_kind text,                      -- stock | etf | option | crypto | mutualfund | cash
+  instrument_kind text,                      -- adr|cef|cfd|crypto|etf|future|mutualfund|option|other|stock
   units numeric(18,6) not null,
   price numeric(18,6),
   market_value numeric(18,4),
@@ -281,9 +281,32 @@ Body: `{ accountId? }` (omit to sync all).
    `external_id`.
 - → `200 { accounts, holdingsCount, distributionsCount, syncedAt }`
 
-**Cost note:** deliberately avoids `refreshBrokerageAuthorization`, which is billed per call. The
-deprecated `getUserHoldings` is not used; the docs direct callers to the finer-grained
-balance/positions/orders endpoints instead.
+**Cost note:** deliberately avoids `refreshBrokerageAuthorization`, which is billed per call.
+
+**`getUserHoldings` is not merely deprecated — it is unusable for us.** The SDK's own type
+documentation (v12.1.8) states it *"will return HTTP 410 Gone for all customers that sign up after
+May 11, 2026."* A SnapTrade account created for this project would be inside that window, so the
+finer-grained endpoints are the only viable path.
+
+**Verified against `snaptrade-typescript-sdk@12.1.8` type definitions:**
+
+- Client construction is `new Snaptrade({ auth: SnaptradeAuth.commercialApiKey({ clientId, consumerKey }) })`.
+  The bare `new Snaptrade({ clientId, consumerKey })` form found in older docs no longer type-checks.
+- Every account-information request carries `userId` + `userSecret` per call in commercial-key mode.
+- `loginSnapTradeUser` returns `{ redirectURI?: string, sessionId?: string }` — **both optional**, so
+  the handler must fail loudly when `redirectURI` is absent rather than passing `undefined` to the modal.
+- `AccountPosition` is `{ instrument, units?, price?, cost_basis?, currency?, cash_equivalent?, tax_lots? }`
+  where **`units`, `price`, and `cost_basis` are `string | null`, not numbers**, and there is **no
+  `market_value` and no `open_pnl` field**. Both must be derived:
+  `market_value = units × price` (× `multiplier` for options) and `open_pnl = market_value − cost_basis`.
+  Treating these strings as numbers without parsing yields string concatenation, not arithmetic —
+  the single most likely silent-corruption bug in this feature.
+- `instrument` is a union discriminated on `kind` with ten values: `adr`, `cef`, `cfd`, `crypto`,
+  `etf`, `future`, `mutualfund`, `option`, `other`, `stock`. Most carry
+  `{ id, symbol, raw_symbol, description?, currency?, exchange? }`, but **`option` has no
+  `raw_symbol`** and instead carries `option_type`, `strike_price`, `expiration_date`, `multiplier`,
+  and `underlying`. A normalizer that reads `instrument.raw_symbol` unconditionally returns
+  `undefined` for every option position.
 
 ### `GET /api/snaptrade/connections` · `DELETE /api/snaptrade/connections?id=`
 List via `listBrokerageAuthorizations`; delete removes the connection and cascades local rows.
