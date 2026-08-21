@@ -1,4 +1,5 @@
 # Dependencies
+node_modules/
 robo-advisor/node_modules/
 
 # Build output
