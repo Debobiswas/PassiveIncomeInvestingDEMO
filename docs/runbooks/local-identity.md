@@ -1,6 +1,6 @@
 # Local identity backend
 
-F4 implements the API and database foundation only. The member UI/email/Google lifecycle is F5; hosted configuration and operational acceptance are F6. This runbook does not authorize remote migrations or production provisioning.
+F4 implements the API/database foundation. F5 connects the member UI/email lifecycle; see the [web Auth runbook](web-auth.md) for tests and remaining Google/hosted gates. Hosted operational acceptance is F6. This runbook does not authorize remote migrations or production provisioning.
 
 ## Start and verify
 
@@ -42,7 +42,7 @@ node --env-file=.env.local scripts/dev-api.ts
 
 Alternatively supply environment variables externally and run `npm run dev:api`. The development adapter listens on loopback port 3001; it is not a production server. Vercel entry points use the same Web Request/Response handler. Hosted routing still requires F6 verification.
 
-Requests use `Authorization: Bearer <access-token>`; never put tokens in URLs or logs. A browser Origin, when supplied, must match the API origin. Native clients need not send Origin. F5 should use a same-origin development proxy, not wildcard CORS. The web app is not yet connected to these endpoints.
+Requests use `Authorization: Bearer <access-token>`; never put tokens in URLs or logs. A browser Origin, when supplied, must match the API origin. Native clients need not send Origin. F5 uses a same-origin development proxy, not wildcard CORS; the configured web app now consumes these endpoints.
 
 ## Contract
 

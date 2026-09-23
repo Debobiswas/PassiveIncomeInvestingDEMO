@@ -8,7 +8,18 @@ export function AppLayout() {
   useEffect(() => {
     main.current?.focus({ preventScroll: true });
     window.scrollTo(0, 0);
-    document.title = `${main.current?.querySelector('h1')?.textContent ?? 'Passive Income Investing'} · PII`;
+    const updateTitle = () => {
+      document.title = `${main.current?.querySelector('h1')?.textContent ?? 'Passive Income Investing'} · PII`;
+    };
+    updateTitle();
+    const observer = new MutationObserver(updateTitle);
+    if (main.current)
+      observer.observe(main.current, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
+    return () => observer.disconnect();
   }, [location.pathname]);
 
   return (

@@ -24,6 +24,7 @@
     "db:reset:local": "node scripts/local-db.ts reset",
     "db:check": "supabase db lint --local --schema public,private --fail-on error && supabase db advisors --local --fail-on error",
     "test:e2e": "npm run build && playwright test",
+    "test:auth:e2e": "node scripts/auth-e2e.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run typecheck && npm run lint && npm run test && npm run format:check && npm run build"

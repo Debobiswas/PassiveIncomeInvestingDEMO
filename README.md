@@ -24,7 +24,7 @@ npm ci
 npm run dev
 ```
 
-Open the URL Vite prints, normally `http://localhost:5173`. `/` explains preview limitations; `/demo/home` opens the sample application. Member UI under `/app/*` remains unavailable until F5 connects sign-in and onboarding to the new backend.
+Open the URL Vite prints, normally `http://localhost:5173`. `/` explains preview limitations; `/demo/home` opens the sample application. `/login` and `/app/*` connect to real local sign-in/onboarding when configured; otherwise they show an explicit unavailable state. See [web Auth setup](docs/runbooks/web-auth.md).
 
 Checks:
 
@@ -60,7 +60,7 @@ New production code is strict TypeScript. Legacy JSX remains deliberately untype
 
 ## Local identity backend
 
-With Docker running, use `npm run db:start`, `npm run db:check`, then `npm run test:integration`. The isolated local project uses API port 55421 and database port 55422; it does not use another project's default ports. See the [identity runbook](docs/runbooks/local-identity.md) for API environment setup, endpoint contracts, security boundaries and **destructive local-only** migration replay. No remote database is needed or modified. The backend persists profiles/onboarding and enforces current staff authorization; the F5 browser lifecycle is still pending.
+With Docker running, use `npm run db:start`, `npm run db:check`, then `npm run test:integration`. The isolated local project uses API port 55421 and database port 55422; it does not use another project's default ports. See the [identity runbook](docs/runbooks/local-identity.md) for API/security and **destructive local-only** replay, and the [web Auth runbook](docs/runbooks/web-auth.md) for connected screens. `npm run test:auth:e2e` exercises actual local email/Auth/onboarding journeys. Live Google success and approved disclosure content remain external gates. No remote database is needed or modified.
 
 ## CI and deployment boundary
 
@@ -73,6 +73,7 @@ The GitHub workflow runs install, type/lint/unit/format/build checks and browser
 - `codex/foundation-rebuild-plan`: planning branch from `master`; contains the rebuild documentation and AGENTS.md. Application refactoring has not started here.
 - `codex/foundation-phase-1`: F1–F3 workspace, CI/test baseline and routed demo isolation. See [implementation evidence and remaining gates](docs/rebuild/evidence/F1-F3-foundation.md).
 - `codex/foundation-identity`: F4 identity/profile/onboarding API and private database foundation. See [local verification and remaining gates](docs/rebuild/evidence/F4-identity.md).
+- `codex/foundation-auth-ui`: F5 connected web sign-in/recovery/onboarding and account-scoped cache. See [local browser evidence and hosted gates](docs/rebuild/evidence/F5-auth-ui.md).
 - `feat/portfolio-import@f3b65e2`: independent worktree with auth/routing/schema/parser groundwork and 33 passing unit tests at audit time. Its live provider and visible import workflow are incomplete.
 - `docs/superpowers/` and `PHASE_1_REQUIREMENTS.md`: historical prototype plans, with scope/numbering conflicts identified in the rebuild plan.
 

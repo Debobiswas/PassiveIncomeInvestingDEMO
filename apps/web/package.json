@@ -9,11 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@pii/contracts": "0.0.0",
+    "@supabase/supabase-js": "2.117.0",
+    "@tanstack/react-query": "5.103.2",
     "lucide-react": "1.16.0",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-router-dom": "7.18.4",
-    "recharts": "3.8.1"
+    "recharts": "3.8.1",
+    "zod": "4.6.5"
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.3.0",

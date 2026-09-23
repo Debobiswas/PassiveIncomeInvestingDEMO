@@ -1,0 +1,122 @@
+.auth-panel {
+  max-width: 40rem;
+  margin: 1rem auto;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  background: #fff;
+  border: 1px solid #d6d0c5;
+  border-radius: 1rem;
+  color: #242424;
+  overflow-wrap: anywhere;
+}
+.auth-panel h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.auth-panel h2 {
+  font-size: 1.35rem;
+  line-height: 1.4;
+  font-weight: 650;
+  margin-block: 1rem;
+}
+.auth-panel p {
+  margin-bottom: 1.25rem;
+}
+.auth-panel fieldset {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+.auth-panel label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.auth-panel input:not([type='checkbox']),
+.auth-panel select {
+  width: 100%;
+  max-width: 100%;
+  min-height: 48px;
+  border: 1px solid #756f64;
+  border-radius: 0.5rem;
+  padding: 0.7rem;
+  background: #fff;
+  color: #242424;
+  font: inherit;
+  margin-bottom: 1.25rem;
+}
+.auth-panel button {
+  white-space: normal;
+}
+.auth-panel button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+.auth-panel .secondary-link {
+  border: 1px solid #756f64;
+  width: 100%;
+}
+.auth-panel .primary-link {
+  width: 100%;
+}
+.auth-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+.auth-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  color: #174b89;
+}
+.field-help {
+  color: #555;
+  font-size: 0.9375rem;
+}
+.form-error {
+  background: #fff0ed;
+  border-left: 4px solid #a52b19;
+  padding: 1rem;
+  color: #792015;
+}
+.form-notice {
+  background: #edf4fa;
+  padding: 1rem;
+  color: #173c61;
+}
+.disclosure-body {
+  white-space: pre-wrap;
+  margin-block: 1.5rem;
+  padding: 1rem;
+  background: #f7f5ef;
+}
+.auth-panel .checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-block: 0.75rem;
+  min-height: 48px;
+}
+.checkbox-label input {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+.member-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.member-bar button {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  text-decoration: underline;
+  font: inherit;
+}

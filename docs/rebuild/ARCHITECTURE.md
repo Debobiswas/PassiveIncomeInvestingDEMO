@@ -1,6 +1,6 @@
 # Proposed application architecture
 
-Status: target architecture, adopted incrementally through the locally verified F1–F4 slices; see [F4 evidence](evidence/F4-identity.md) for implemented boundaries and remaining gates. Future domain/worker/native modules below are not yet built. This is a technical plan, not an amendment to the signed contract. See the milestone PRDs for product acceptance.
+Status: target architecture, adopted incrementally through F1–F5 local implementation; see [F4 database/API evidence](evidence/F4-identity.md) and [F5 web identity evidence](evidence/F5-auth-ui.md) for remaining hosted/provider gates. Future domain/worker/native modules below are not yet built. This is a technical plan, not an amendment to the signed contract. See milestone PRDs for acceptance.
 
 ## Decision
 
@@ -90,7 +90,7 @@ Proposed route inventory:
 - Admin: `/admin/funds`, `/admin/distributions`, `/admin/content`, later operations pages. The server authorizes every request independently of route guards.
 - Explicit 404, permission-denied, session-expired, loading, empty, and stale-data states. Refresh/deep links must preserve identity and route state.
 
-Use React Router data routing and one query-cache library (proposed TanStack Query) for server state. Route loaders may prefetch the same query keys; do not create competing caches. Keep draft form state local, navigable filters in the URL, and persisted preferences/goals on the server. Scope every private cache key to identity/portfolio/version and clear it on sign-out/account change. Never place private API responses in public CDN caches.
+Use React Router data routing and one query-cache library (TanStack Query, adopted in F5) for server state. Route loaders may prefetch the same query keys; do not create competing caches. Keep draft form state local, navigable filters in the URL, and persisted preferences/goals on the server. Scope every private cache key to identity/portfolio/version and clear it on sign-out/account change. F5 additionally uses a session epoch to reject late responses across identities. Never place private API responses in public CDN caches.
 
 Route-lazy-load charts, chat, admin tools, and workbook parsing. Do not put SheetJS in the common app shell. Long browser parsing, if retained for preview, runs in a worker with limits; server validation remains authoritative. Reuse UI tokens/accessibility primitives, not entire 600–900-line components with embedded business logic.
 

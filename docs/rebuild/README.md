@@ -41,9 +41,11 @@ Build M1 first, then prove a persisted manual/CSV portfolio journey. Stabilize s
 
 After shared contracts stabilize, limited M2/catalogue/native work can proceed in parallel under clear ownership. Do not independently build ten feature backends. Reuse review agents for bounded PR verification, not competing architecture decisions.
 
-F1–F3 implementation is on `codex/foundation-phase-1`: a root workspace, strict typed shell, CI/test baseline and routed demo isolation. See [implementation evidence and open gates](evidence/F1-F3-foundation.md). F4 on `codex/foundation-identity` adds the verified identity/profile/onboarding backend, private schema and actual isolation tests; see [F4 evidence](evidence/F4-identity.md). This is not M1 acceptance: sign-in/onboarding UI, hosted provider journeys, monitoring and deployment remain F5–F6. Historical code references in the PRDs identify the audited commits, not current paths.
+F1–F3 implementation is on `codex/foundation-phase-1`: a root workspace, strict typed shell, CI/test baseline and routed demo isolation. See [implementation evidence and open gates](evidence/F1-F3-foundation.md). F4 on `codex/foundation-identity` adds the verified identity/profile/onboarding backend, private schema and actual isolation tests; see [F4 evidence](evidence/F4-identity.md). F5's connected web implementation is described below. M1 acceptance still requires hosted provider journeys, monitoring, deployment and the remaining review gates. Historical PRD code references identify audited commits, not current paths.
 
 ## Resolved integration decisions
+
+F5 on `codex/foundation-auth-ui` now connects verified email/password, recovery, persisted onboarding and member UI with local desktop/mobile browser evidence. Google initiation/failure handling is implemented; real Google success and hosted email/configuration still require external acceptance. See [F5 results and gates](evidence/F5-auth-ui.md). The preceding F4 record remains historical evidence, not the latest UI status.
 
 - Keep React/Vite, Vercel and Supabase as the baseline; choose a different framework only for a demonstrated requirement.
 - One modular backend and an independent bounded worker; one versioned product API shared by web/native.

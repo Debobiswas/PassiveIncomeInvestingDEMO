@@ -10,8 +10,9 @@ export function Landing() {
         on a phone or a larger screen.
       </p>
       <p>
-        This preview uses fictional sample data. Member accounts, brokerage
-        connections and live advice are not available yet.
+        The demo uses fictional sample data. Member sign-in is available only in
+        configured development environments. Brokerage connections and live
+        advice are not available yet.
       </p>
       <Link className="primary-link" to="/demo/home">
         Explore the demo
@@ -19,20 +20,8 @@ export function Landing() {
       <p className="supporting-text">
         No sign-up needed. Do not enter personal or financial information.
       </p>
-    </section>
-  );
-}
-
-export function MemberUnavailable() {
-  return (
-    <section className="intro-panel">
-      <h1>Member access is not available yet</h1>
-      <p>
-        Secure sign-in and private portfolios are still being built. No account
-        or portfolio data has been loaded.
-      </p>
-      <Link className="primary-link" to="/">
-        Return to the preview
+      <Link className="secondary-link" to="/login">
+        Member sign-in
       </Link>
     </section>
   );

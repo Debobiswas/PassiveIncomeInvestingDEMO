@@ -6,6 +6,8 @@ Implementation update: the first F1–F3 engineering slice is on `codex/foundati
 
 ## What “rebase the codebase” means here
 
+F5 implementation update: connected Auth/onboarding and identity-scoped browser caching are locally tested on `codex/foundation-auth-ui`. [F5 evidence](evidence/F5-auth-ui.md) distinguishes these results from unverified live Google/hosted email and the full staging win condition. Next is F6 staging/operations work; no automatic deployment is authorized.
+
 Establish a new architectural baseline through small reviewed changes. Do not rewrite the published history of the old developer's branch. Keep its commit IDs as evidence, selectively port useful pieces, and retain the existing demo while complete user journeys move into the new structure. A Git rebase is unnecessary to achieve this and would complicate recovery of concurrent work.
 
 The current product is mostly a prototype, so there is little functioning backend behavior to preserve. Still, preserve the source documents, useful UI assets/tokens, intended journeys and tests worth improving. Do not spend weeks cosmetically rearranging fixture-driven screens before implementing a real path through authentication, API, persistence and UI.

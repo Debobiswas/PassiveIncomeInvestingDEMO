@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { AppLayout } from './AppLayout';
 import { RouteError } from './RouteError';
-import { Landing, MemberUnavailable, NotFound } from './pages';
+import { Landing, NotFound } from './pages';
 
 export const router = createBrowserRouter([
   {
@@ -14,8 +14,56 @@ export const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <Landing /> },
-      { path: 'app/*', element: <MemberUnavailable /> },
-      { path: 'login', element: <MemberUnavailable /> },
+      {
+        lazy: async () => ({
+          Component: (await import('../features/auth/AuthLayout')).AuthLayout,
+        }),
+        children: [
+          {
+            path: 'login',
+            lazy: async () => ({
+              Component: (await import('../features/auth/Login')).Login,
+            }),
+          },
+          {
+            path: 'auth/callback',
+            lazy: async () => ({
+              Component: (await import('../features/auth/Callback')).Callback,
+            }),
+          },
+          {
+            path: 'auth/recovery',
+            lazy: async () => ({
+              Component: (await import('../features/auth/Recovery')).Recovery,
+            }),
+          },
+          {
+            path: 'app',
+            lazy: async () => ({
+              Component: (await import('../features/identity/MemberLayout'))
+                .MemberLayout,
+            }),
+            children: [
+              { index: true, element: <Navigate to="home" replace /> },
+              {
+                path: 'home',
+                lazy: async () => ({
+                  Component: (await import('../features/identity/MemberHome'))
+                    .MemberHome,
+                }),
+              },
+              {
+                path: 'onboarding',
+                lazy: async () => ({
+                  Component: (await import('../features/identity/Onboarding'))
+                    .Onboarding,
+                }),
+              },
+              { path: '*', element: <NotFound /> },
+            ],
+          },
+        ],
+      },
       {
         path: 'demo',
         lazy: async () => ({

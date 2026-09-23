@@ -107,7 +107,7 @@ test('unknown routes and member routes never masquerade as a live portfolio', as
   ).toBeVisible();
   await page.goto('/app/portfolio');
   await expect(
-    page.getByRole('heading', { name: 'Member access is not available yet' }),
+    page.getByRole('heading', { name: 'Member access is not configured' }),
   ).toBeVisible();
   await expect(page.getByLabel('Demo navigation')).toHaveCount(0);
   await expect(page.getByText('Demo portfolio', { exact: true })).toHaveCount(
