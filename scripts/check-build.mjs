@@ -37,10 +37,12 @@ export function verifyBuild(directory) {
     throw new Error(`Initial JS + CSS exceeds 200 KiB gzip: ${bytes} bytes`);
   for (const file of readdirSync(directory, { recursive: true })) {
     if (
-      /\.(pdf|xlsx)$/i.test(file) ||
+      /\.(pdf|xlsx|map)$/i.test(file) ||
       /(^|[/\\])reference([/\\]|$)/.test(file)
     ) {
-      throw new Error(`Private reference artifact in web output: ${file}`);
+      throw new Error(
+        `Private reference artifact or source map in web output: ${file}`,
+      );
     }
   }
   console.log(

@@ -6,6 +6,8 @@ Implementation update: the first F1–F3 engineering slice is on `codex/foundati
 
 ## What “rebase the codebase” means here
 
+F6 update: `codex/foundation-operations` adds locally tested monitoring/readiness/release safeguards. [F6 evidence](evidence/F6-operations.md) separates this implementation from unperformed hosted deployment, source-map/alert acceptance and rollback rehearsal. Confirm approved staging targets before hosted work.
+
 F5 implementation update: connected Auth/onboarding and identity-scoped browser caching are locally tested on `codex/foundation-auth-ui`. [F5 evidence](evidence/F5-auth-ui.md) distinguishes these results from unverified live Google/hosted email and the full staging win condition. Next is F6 staging/operations work; no automatic deployment is authorized.
 
 Establish a new architectural baseline through small reviewed changes. Do not rewrite the published history of the old developer's branch. Keep its commit IDs as evidence, selectively port useful pieces, and retain the existing demo while complete user journeys move into the new structure. A Git rebase is unnecessary to achieve this and would complicate recovery of concurrent work.

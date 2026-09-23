@@ -1,7 +1,22 @@
 import { createServer } from 'node:http';
 import { Readable } from 'node:stream';
 import { pathToFileURL } from 'node:url';
-import { createIdentityHandler } from '@pii/server';
+import {
+  createIdentityHandler,
+  createReadinessHandler,
+  liveness,
+} from '@pii/server';
+
+export function applicationHandler() {
+  const identity = createIdentityHandler();
+  const readiness = createReadinessHandler();
+  return (request: Request) => {
+    const path = new URL(request.url).pathname;
+    if (path === '/api/health') return liveness(request);
+    if (path === '/api/ready') return readiness(request);
+    return identity(request);
+  };
+}
 
 // This adapter exercises the same Web Request handler used by Vercel, over HTTP.
 export function apiServer(handler: (request: Request) => Promise<Response>) {
@@ -44,7 +59,7 @@ if (
   process.argv[1] &&
   import.meta.url === pathToFileURL(process.argv[1]).href
 ) {
-  apiServer(createIdentityHandler()).listen(3001, '127.0.0.1', () =>
+  apiServer(applicationHandler()).listen(3001, '127.0.0.1', () =>
     console.log('PII API: http://127.0.0.1:3001'),
   );
 }

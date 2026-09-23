@@ -4,6 +4,7 @@
   "include": [
     "playwright.config.ts",
     "playwright.auth.config.ts",
+    "playwright.operations.config.ts",
     "vitest.config.ts",
     "tests/**/*.ts",
     "apps/web/vite.config.ts"

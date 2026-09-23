@@ -45,6 +45,8 @@ F1–F3 implementation is on `codex/foundation-phase-1`: a root workspace, stric
 
 ## Resolved integration decisions
 
+F6 local operations implementation is on `codex/foundation-operations`: privacy-first diagnostics, protected readiness, private browser source maps and release smoke/runbooks. [F6 evidence](evidence/F6-operations.md) lists the still-open hosted deployment, monitoring/symbolication and rollback gates. F6 and M1 are not fully accepted.
+
 F5 on `codex/foundation-auth-ui` now connects verified email/password, recovery, persisted onboarding and member UI with local desktop/mobile browser evidence. Google initiation/failure handling is implemented; real Google success and hosted email/configuration still require external acceptance. See [F5 results and gates](evidence/F5-auth-ui.md). The preceding F4 record remains historical evidence, not the latest UI status.
 
 - Keep React/Vite, Vercel and Supabase as the baseline; choose a different framework only for a demonstrated requirement.

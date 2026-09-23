@@ -69,3 +69,12 @@ export type Profile = z.infer<typeof profileSchema>;
 export type ProfilePatch = z.infer<typeof profilePatchSchema>;
 export type Onboarding = z.infer<typeof onboardingSchema>;
 export type OnboardingPatch = z.infer<typeof onboardingPatchSchema>;
+export {
+  diagnosticSchema,
+  diagnosticRoute,
+  redactDiagnostic,
+  releaseSchema,
+  telemetryConfigSchema,
+  privateDataCollection,
+} from './telemetry.ts';
+export type { Diagnostic, TelemetryConfig } from './telemetry.ts';

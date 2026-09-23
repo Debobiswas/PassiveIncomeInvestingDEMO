@@ -1,0 +1,8 @@
+.claude/
+.superpowers/
+.private-artifacts/
+docs/reference/
+test-results/
+playwright-report/
+coverage/
+.env*

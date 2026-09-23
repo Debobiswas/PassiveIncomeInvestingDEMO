@@ -51,6 +51,7 @@
 - Individual root commands: `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, `npm run format:check`. Use `npm ci` with the one committed root lockfile; never create a nested lockfile.
 - Local backend: `npm run db:start`, `npm run db:check`, `npm run test:integration`; see `docs/runbooks/local-identity.md`. `db:reset:local` is destructive and only for the verified disposable local database. Load commands do not yet exist. The separate feature worktree still uses its own original commands (33 tests at the audited commit).
 - Connected Auth browser checks: `npm run test:auth:e2e` after `db:start`; see `docs/runbooks/web-auth.md`. Run serially with integration tests against disposable local data. Never upload Auth traces, tokens, mail dumps or password-bearing failure snapshots.
+- Operations: `npm run test:operations:e2e` intercepts synthetic browser telemetry; `npm run release:smoke` is read-only and requires an explicit approved HTTPS target and protected synthetic credentials. See `docs/runbooks/operations.md`. Only the root build archives source maps safely; never publish `.private-artifacts/` or deploy the workspace-only Vite output. Local checks do not establish hosted region, alert receipt, source-map symbolication, rollback or full M1 acceptance.
 - New app source must be TypeScript. The legacy-only JSX exception is tested. Do not widen ESLint boundaries or weaken checks to make a feature pass. Import boundaries are engineering guardrails, not authorization controls.
 
 ## Documentation and source care

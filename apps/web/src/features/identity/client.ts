@@ -2,6 +2,8 @@ import { onboardingSchema, profileSchema, problemSchema } from '@pii/contracts';
 import type { OnboardingPatch, ProfilePatch } from '@pii/contracts';
 import type { ZodType } from 'zod';
 import { getRuntime } from '../auth/runtime';
+import { diagnosticRoute } from '@pii/contracts';
+import { reportBrowser } from '../../app/telemetry';
 
 export class MemberError extends Error {
   constructor(
@@ -45,6 +47,15 @@ async function request<T>(
     if (!response.ok) {
       if (response.status === 401) auth.expire();
       const problem = problemSchema.safeParse(data);
+      if (response.status >= 500)
+        reportBrowser({
+          kind: 'member_failure',
+          route: diagnosticRoute(`/api/v1${path}`),
+          code: 'service_unavailable',
+          ...(problem.success
+            ? { request_id: problem.data.error.request_id }
+            : {}),
+        });
       const message =
         response.status === 409
           ? 'Your saved information changed. Reload it before saving again.'

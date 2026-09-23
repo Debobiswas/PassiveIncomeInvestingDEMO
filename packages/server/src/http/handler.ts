@@ -3,7 +3,11 @@ import {
   emptyInputSchema,
   profilePatchSchema,
   onboardingPatchSchema,
+  diagnosticRoute,
+  diagnosticSchema,
 } from '@pii/contracts';
+import type { Diagnostic } from '@pii/contracts';
+import { reportServer } from '../telemetry.ts';
 import { loadServerConfig } from '../config.ts';
 import type { ServerConfig } from '../config.ts';
 import { ApiError, invalidInput, unauthenticated, timeout } from '../errors.ts';
@@ -19,6 +23,7 @@ const methods: Record<string, readonly string[]> = {
 export function createIdentityHandler(
   getConfig: () => ServerConfig = loadServerConfig,
   fetcher: typeof fetch = fetch,
+  report: (diagnostic: Diagnostic) => Promise<void> = reportServer,
 ) {
   return async (request: Request): Promise<Response> => {
     const requestId = randomUUID();
@@ -109,6 +114,24 @@ export function createIdentityHandler(
               'internal_error',
               'The request could not be completed.',
             );
+      if (safe.status >= 500) {
+        const diagnostic = diagnosticSchema.parse({
+          kind: 'api_failure',
+          route: diagnosticRoute(new URL(request.url).pathname),
+          code:
+            safe.status === 504
+              ? 'request_timeout'
+              : safe.status === 503
+                ? 'service_unavailable'
+                : 'internal_error',
+          request_id: requestId,
+        });
+        try {
+          await report(diagnostic);
+        } catch {
+          /* Telemetry never changes HTTP semantics. */
+        }
+      }
       return Response.json(
         {
           error: {

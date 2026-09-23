@@ -36,7 +36,7 @@ npm run test:e2e
 
 `check` runs strict type checking, ESLint/import boundaries, unit/guardrail tests, formatting and the production build. `test:e2e` builds and runs real browser journeys in desktop Chromium and mobile-emulated WebKit. Linux may need `npx playwright install --with-deps chromium webkit`.
 
-Individual commands: `npm run typecheck`, `npm run lint`, `npm test`, `npm run format:check`, `npm run build`. Use `npm run format` for formatting. The build gate limits initial compressed JS + CSS to 200 KiB and rejects private PDF/XLSX reference artifacts in the output. `npm run preview -- --host 127.0.0.1 --port 4173` serves the built app locally; it is not a production server.
+Individual commands: `npm run typecheck`, `npm run lint`, `npm test`, `npm run format:check`, `npm run build`. Use `npm run format` for formatting. The root build archives browser source maps privately, limits initial compressed JS + CSS to 200 KiB and rejects public source maps/PDF/XLSX reference artifacts. `npm run preview -- --host 127.0.0.1 --port 4173` serves the built app locally; it is not a production server. `npm run test:operations:e2e` verifies browser monitoring without sending external events. See the [operations runbook](docs/runbooks/operations.md) for telemetry configuration, protected readiness, release smoke and rollback.
 
 ## Structure and boundaries
 
@@ -74,6 +74,7 @@ The GitHub workflow runs install, type/lint/unit/format/build checks and browser
 - `codex/foundation-phase-1`: F1–F3 workspace, CI/test baseline and routed demo isolation. See [implementation evidence and remaining gates](docs/rebuild/evidence/F1-F3-foundation.md).
 - `codex/foundation-identity`: F4 identity/profile/onboarding API and private database foundation. See [local verification and remaining gates](docs/rebuild/evidence/F4-identity.md).
 - `codex/foundation-auth-ui`: F5 connected web sign-in/recovery/onboarding and account-scoped cache. See [local browser evidence and hosted gates](docs/rebuild/evidence/F5-auth-ui.md).
+- `codex/foundation-operations`: F6 local monitoring/readiness/release safeguards. See [local evidence and still-open hosted acceptance](docs/rebuild/evidence/F6-operations.md). No deployment or rollback rehearsal is implied.
 - `feat/portfolio-import@f3b65e2`: independent worktree with auth/routing/schema/parser groundwork and 33 passing unit tests at audit time. Its live provider and visible import workflow are incomplete.
 - `docs/superpowers/` and `PHASE_1_REQUIREMENTS.md`: historical prototype plans, with scope/numbering conflicts identified in the rebuild plan.
 

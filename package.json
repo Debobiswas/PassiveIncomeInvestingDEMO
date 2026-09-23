@@ -13,7 +13,8 @@
   },
   "scripts": {
     "dev": "npm run dev --workspace=@pii/web",
-    "build": "npm run build --workspace=@pii/web && node scripts/check-build.mjs",
+    "build": "node scripts/release-config.ts && npm run build --workspace=@pii/web && node scripts/private-source-maps.mjs && node scripts/check-build.mjs",
+    "release:smoke": "node scripts/release-smoke.ts",
     "preview": "npm run preview --workspace=@pii/web --",
     "typecheck": "tsc --project apps/web/tsconfig.json && tsc --project tsconfig.tools.json && tsc --project tsconfig.server.json",
     "lint": "eslint .",
@@ -25,6 +26,7 @@
     "db:check": "supabase db lint --local --schema public,private --fail-on error && supabase db advisors --local --fail-on error",
     "test:e2e": "npm run build && playwright test",
     "test:auth:e2e": "node scripts/auth-e2e.ts",
+    "test:operations:e2e": "playwright test --config playwright.operations.config.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run typecheck && npm run lint && npm run test && npm run format:check && npm run build"

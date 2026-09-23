@@ -2,7 +2,7 @@ import { randomUUID, createHmac } from 'node:crypto';
 import { once } from 'node:events';
 import { createClient } from '@supabase/supabase-js';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { createIdentityHandler } from '@pii/server';
+import { createIdentityHandler, createReadinessHandler } from '@pii/server';
 import { profileSchema, onboardingSchema, problemSchema } from '@pii/contracts';
 import { apiServer } from '../../scripts/dev-api.ts';
 import { admin, pool, config, jwtSecret, asUser } from './local.ts';
@@ -217,6 +217,58 @@ describe('real Auth → HTTP API → user-context RPC → Postgres', () => {
     ).toEqual([{ n: 1 }]);
   });
 
+  it('probes actual Auth and owned schema without writes and fails on broken Data API', async () => {
+    const key = 'synthetic-local-readiness-123456789';
+    const release = 'a'.repeat(40);
+    const probe = () =>
+      new Request('http://localhost/api/ready', {
+        headers: {
+          'x-pii-readiness-key': key,
+          authorization: `Bearer ${a.token}`,
+        },
+      });
+    const ready = createReadinessHandler(
+      () => config,
+      fetch,
+      () => key,
+      () => release,
+    );
+    const response = await ready(probe());
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({
+      status: 'ready',
+      release,
+      request_id: expect.any(String),
+    });
+    const brokenData: typeof fetch = (input, init) =>
+      String(input).includes('/rest/v1/')
+        ? Promise.resolve(
+            Response.json(
+              { message: 'synthetic schema failure' },
+              { status: 503 },
+            ),
+          )
+        : fetch(input, init);
+    const notReady = createReadinessHandler(
+      () => config,
+      brokenData,
+      () => key,
+      () => release,
+    );
+    expect((await notReady(probe())).status).toBe(503);
+    expect(
+      (
+        await ready(
+          new Request('http://localhost/api/ready', {
+            headers: {
+              'x-pii-readiness-key': key,
+              authorization: 'Bearer invalid.invalid.invalid',
+            },
+          }),
+        )
+      ).status,
+    ).toBe(503);
+  });
   it('persists only allowed profile fields and detects concurrent edits', async () => {
     const response = await api('/me', a.token, 'PATCH', {
       expected_revision: 0,

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@pii/contracts": "0.0.0",
+    "@sentry/node": "11.0.0",
     "@supabase/supabase-js": "2.117.0",
     "zod": "4.6.5"
   }
