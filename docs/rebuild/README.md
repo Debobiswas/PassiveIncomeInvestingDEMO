@@ -41,7 +41,7 @@ Build M1 first, then prove a persisted manual/CSV portfolio journey. Stabilize s
 
 After shared contracts stabilize, limited M2/catalogue/native work can proceed in parallel under clear ownership. Do not independently build ten feature backends. Reuse review agents for bounded PR verification, not competing architecture decisions.
 
-F1–F3 implementation is now on `codex/foundation-phase-1`: a root workspace, strict typed shell, CI/test baseline and routed demo isolation. See [implementation evidence and open gates](evidence/F1-F3-foundation.md). This is not M1 acceptance: identity, database isolation, onboarding, monitoring and hosted deployment remain F4–F6. Historical code references in the PRDs identify the audited commits, not current paths.
+F1–F3 implementation is on `codex/foundation-phase-1`: a root workspace, strict typed shell, CI/test baseline and routed demo isolation. See [implementation evidence and open gates](evidence/F1-F3-foundation.md). F4 on `codex/foundation-identity` adds the verified identity/profile/onboarding backend, private schema and actual isolation tests; see [F4 evidence](evidence/F4-identity.md). This is not M1 acceptance: sign-in/onboarding UI, hosted provider journeys, monitoring and deployment remain F5–F6. Historical code references in the PRDs identify the audited commits, not current paths.
 
 ## Resolved integration decisions
 

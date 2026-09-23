@@ -1,6 +1,6 @@
 # Proposed application architecture
 
-Status: proposed implementation baseline, not yet built. This is a technical plan, not an amendment to the signed contract. See the milestone PRDs for product acceptance.
+Status: target architecture, adopted incrementally through the locally verified F1–F4 slices; see [F4 evidence](evidence/F4-identity.md) for implemented boundaries and remaining gates. Future domain/worker/native modules below are not yet built. This is a technical plan, not an amendment to the signed contract. See the milestone PRDs for product acceptance.
 
 ## Decision
 
@@ -96,7 +96,7 @@ Route-lazy-load charts, chat, admin tools, and workbook parsing. Do not put Shee
 
 ## API and authorization
 
-All product reads/writes use `/api/v1/...` contracts. Supabase Auth SDK calls and narrowly scoped signed object-upload URLs are explicit exceptions. This gives the future mobile app the same behavior as the web app. Use OpenAPI or an equivalent generated contract plus runtime schemas; select the schema/code-generation tool in the first implementation slice.
+All product reads/writes use `/api/v1/...` contracts. Supabase Auth SDK calls and narrowly scoped signed object-upload URLs are explicit exceptions. This gives the future mobile app the same behavior as the web app. F4 selects Zod runtime schemas with inferred TypeScript request/response types in `packages/contracts` as the shared source of truth; no independent hand-maintained client types. OpenAPI/client SDK generation can be added when needed; it is not implemented yet.
 
 Every request resolves a verified actor, validates payload/path/query, authorizes the resource, and calls a use case. Do not trust `user_id` supplied in JSON. For ordinary user operations, repositories use the user's verified JWT through Supabase Data API so RLS also applies. Do not default every endpoint to service-role access. Admin/provider jobs use narrowly scoped server-only access and must separately enforce ownership, role, and write constraints.
 

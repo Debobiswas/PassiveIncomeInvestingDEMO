@@ -1,0 +1,14 @@
+{
+  "name": "@pii/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@pii/contracts": "0.0.0",
+    "@supabase/supabase-js": "2.117.0",
+    "zod": "4.6.5"
+  }
+}

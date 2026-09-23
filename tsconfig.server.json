@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "erasableSyntaxOnly": true
+  },
+  "include": [
+    "api/**/*.ts",
+    "packages/**/*.ts",
+    "scripts/*.ts",
+    "tests/integration/**/*.ts",
+    "vitest.integration.config.ts"
+  ]
+}

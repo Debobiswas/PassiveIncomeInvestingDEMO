@@ -2,7 +2,7 @@
 
 Status: implementation plan, not authorization to deploy or a report of completed product work. The planning branch is `codex/foundation-rebuild-plan`, created from `master@4dbf440`. The independent `feat/portfolio-import@f3b65e2` branch is preserved.
 
-Implementation update: the first F1–F3 engineering slice is on `codex/foundation-phase-1`; [evidence and residual gates](evidence/F1-F3-foundation.md) distinguish local completion from hosted CI/deployment and full M1 acceptance. F2's real migration replay/isolation checks necessarily land with F4's first schema, not an empty database test.
+Implementation update: the first F1–F3 engineering slice is on `codex/foundation-phase-1`; [evidence and residual gates](evidence/F1-F3-foundation.md) distinguish local completion from hosted CI/deployment and full M1 acceptance. F4's identity backend and actual migration replay/isolation checks are on `codex/foundation-identity`; [F4 evidence](evidence/F4-identity.md) records local results and remaining F5/F6 gates. No remote schema upgrade or product launch is implied.
 
 ## What “rebase the codebase” means here
 

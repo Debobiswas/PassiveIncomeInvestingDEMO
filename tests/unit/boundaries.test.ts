@@ -11,6 +11,20 @@ async function boundaryErrors(code: string, filePath: string) {
 }
 
 describe('browser import boundaries', () => {
+  it('also keeps the shared contracts browser-safe', async () => {
+    expect(
+      await boundaryErrors(
+        "import '@pii/server';",
+        'packages/contracts/src/leak.ts',
+      ),
+    ).toHaveLength(1);
+    expect(
+      await boundaryErrors(
+        "import 'node:fs';",
+        'packages/contracts/src/leak.ts',
+      ),
+    ).toHaveLength(1);
+  });
   it.each([
     "import '../demo/legacy/data/dummy';",
     "export * from '../demo/legacy/data/dummy';",

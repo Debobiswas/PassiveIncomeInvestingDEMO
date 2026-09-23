@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "packageManager": "npm@11.13.0",
   "engines": {
@@ -14,19 +15,28 @@
     "dev": "npm run dev --workspace=@pii/web",
     "build": "npm run build --workspace=@pii/web && node scripts/check-build.mjs",
     "preview": "npm run preview --workspace=@pii/web --",
-    "typecheck": "tsc --project apps/web/tsconfig.json && tsc --project tsconfig.tools.json",
+    "typecheck": "tsc --project apps/web/tsconfig.json && tsc --project tsconfig.tools.json && tsc --project tsconfig.server.json",
     "lint": "eslint .",
     "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "dev:api": "node scripts/dev-api.ts",
+    "db:start": "node scripts/local-db.ts start",
+    "db:reset:local": "node scripts/local-db.ts reset",
+    "db:check": "supabase db lint --local --schema public,private --fail-on error && supabase db advisors --local --fail-on error",
     "test:e2e": "npm run build && playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run typecheck && npm run lint && npm run test && npm run format:check && npm run build"
   },
   "devDependencies": {
+    "@pii/contracts": "0.0.0",
+    "@supabase/supabase-js": "2.117.0",
     "@axe-core/playwright": "4.13.0",
     "@eslint/js": "10.0.1",
     "@playwright/test": "1.63.0",
     "@types/node": "24.13.6",
+    "@types/pg": "8.23.1",
+    "pg": "8.23.0",
     "eslint": "10.4.0",
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-react-refresh": "0.5.2",
@@ -36,5 +46,8 @@
     "typescript": "6.0.3",
     "typescript-eslint": "8.70.1",
     "vitest": "5.0.1"
+  },
+  "dependencies": {
+    "@pii/server": "0.0.0"
   }
 }

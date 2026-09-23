@@ -49,7 +49,7 @@
 - Root setup: Node 24.16.0, npm 11.13.0, `npm ci`, `npm run dev`.
 - Root checks: `npm run check` (types, lint/boundaries, unit, format, build), `npm run test:e2e` (build + Chromium/mobile WebKit). Install browsers with `npx playwright install chromium webkit`; Linux CI uses `--with-deps`.
 - Individual root commands: `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, `npm run format:check`. Use `npm ci` with the one committed root lockfile; never create a nested lockfile.
-- `test:integration`, migration and load commands do not yet exist; add real runtime tests with F4 rather than placeholder successes. The separate feature worktree still uses its own original commands (33 tests at the audited commit).
+- Local backend: `npm run db:start`, `npm run db:check`, `npm run test:integration`; see `docs/runbooks/local-identity.md`. `db:reset:local` is destructive and only for the verified disposable local database. Load commands do not yet exist. The separate feature worktree still uses its own original commands (33 tests at the audited commit).
 - New app source must be TypeScript. The legacy-only JSX exception is tested. Do not widen ESLint boundaries or weaken checks to make a feature pass. Import boundaries are engineering guardrails, not authorization controls.
 
 ## Documentation and source care

@@ -21,6 +21,40 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   { languageOptions: { globals: globals.node } },
   {
+    files: ['packages/contracts/src/**/*.ts'],
+    plugins: { boundaries },
+    rules: {
+      'boundaries/browser': 'error',
+      'no-restricted-globals': [
+        'error',
+        'process',
+        'Buffer',
+        '__dirname',
+        '__filename',
+      ],
+      'no-restricted-imports': [
+        'error',
+        { patterns: ['react', 'react-dom', '@supabase/*', '@pii/server/*'] },
+      ],
+    },
+  },
+  {
+    files: ['api/**/*.ts', 'packages/server/src/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            '**/apps/web/**',
+            '**/demo/**',
+            '@pii/contracts/*',
+            '@pii/server/*',
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ['apps/web/src/**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       globals: globals.browser,
