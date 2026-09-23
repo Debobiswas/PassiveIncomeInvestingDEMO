@@ -1,5 +1,7 @@
 # Phase 1 — Requirements & Information Architecture
 
+> Historical prototype plan. This document uses superseded proposal numbering and demo-only exclusions. For current signed scope and implementation order, use [the rebuild PRD index](docs/rebuild/README.md). In the signed agreement M3 is the calculator and M5 is the RAG advisor; M2 remains a distinct portfolio milestone.
+
 **Source:** `robo-advisor-proposal.md` (Phases 1A + 1B, $40,000 CAD, 16 weeks)
 **Goal:** A simple, intuitive app for passive income investors. The user should always know two things at a glance: **how much they're making** and **what to do next**.
 
