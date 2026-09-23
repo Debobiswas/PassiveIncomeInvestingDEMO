@@ -1,9 +1,15 @@
 # Signed Agreement vs Repository: Implementation Gap Analysis
 
-**Audit date:** September 22, 2026  
-**Contract source:** `Complete_with_Docusign_Blundr_PassiveIncomeI.pdf`  
-**Client-data source:** `Copy of Ultimate-DIY-Investing-Package-v8 DRAFT.xlsx`  
-**Primary code snapshot:** `master` at `4dbf440122dac9505a123147f9f6c7fe313e118d`  
+> Historical audit of the snapshots below. The source documents are now tracked on `codex/foundation-rebuild-plan`. For the current implementation direction and corrections to this assessment, see [the rebuild index](../rebuild/README.md) and [evidence review](../rebuild/EVIDENCE_AND_RISKS.md).
+
+**Audit date:** September 22, 2026
+
+**Contract source:** `Complete_with_Docusign_Blundr_PassiveIncomeI.pdf`
+
+**Client-data source:** `Copy of Ultimate-DIY-Investing-Package-v8 DRAFT.xlsx`
+
+**Primary code snapshot:** `master` at `4dbf440122dac9505a123147f9f6c7fe313e118d`
+
 **Work-in-progress snapshot also reviewed:** `feat/portfolio-import` at `f3b65e22866a44a20332559af793a46d37ff5c42`
 
 ## Executive conclusion

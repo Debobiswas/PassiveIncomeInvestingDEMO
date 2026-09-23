@@ -128,4 +128,3 @@ The source crawl included:
 - extraction of all populated cell values and formulas;
 - visual rendering of all sheets that fit the renderer's size limits, with direct data extraction for oversized sheets;
 - formula, chart, image, sheet, link, package-part, and structured-record inventories.
-
