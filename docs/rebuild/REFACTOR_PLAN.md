@@ -2,6 +2,8 @@
 
 Status: implementation plan, not authorization to deploy or a report of completed product work. The planning branch is `codex/foundation-rebuild-plan`, created from `master@4dbf440`. The independent `feat/portfolio-import@f3b65e2` branch is preserved.
 
+Implementation update: the first F1–F3 engineering slice is on `codex/foundation-phase-1`; [evidence and residual gates](evidence/F1-F3-foundation.md) distinguish local completion from hosted CI/deployment and full M1 acceptance. F2's real migration replay/isolation checks necessarily land with F4's first schema, not an empty database test.
+
 ## What “rebase the codebase” means here
 
 Establish a new architectural baseline through small reviewed changes. Do not rewrite the published history of the old developer's branch. Keep its commit IDs as evidence, selectively port useful pieces, and retain the existing demo while complete user journeys move into the new structure. A Git rebase is unnecessary to achieve this and would complicate recovery of concurrent work.

@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
-import { Plus, Link2, RefreshCw, AlertCircle, ChevronRight, Calendar, Download,
+import { Plus, RefreshCw, AlertCircle, ChevronRight, Download,
          CheckCircle, ArrowRight, Upload, FileText, X } from 'lucide-react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { brokerageAccounts, portfolioHoldings, driftAlerts, rebalanceHistory,
          upcomingDates, recentActivity } from '../data/dummy';
 
@@ -149,7 +149,7 @@ function RebalanceWizardModal({ onClose, onComplete }) {
               {step === 1 ? 'Review Drift' : step === 2 ? 'Trade Plan' : 'Rebalance Complete'}
             </p>
             <p className="text-[10px]" style={{ color: C.low }}>
-              {step === 1 ? '4 positions off target' : step === 2 ? 'Net zero — no new money needed' : 'Trades queued for next market open'}
+              {step === 1 ? '4 sample positions off target' : step === 2 ? 'Illustrative plan only' : 'Demo complete — no trades placed'}
             </p>
           </div>
           <button onClick={onClose} aria-label="Close"
@@ -252,7 +252,7 @@ function RebalanceWizardModal({ onClose, onComplete }) {
                 <button onClick={() => { setStep(3); onComplete(); }}
                   className="flex-1 flex items-center justify-center gap-2 rounded-xl text-sm font-semibold text-white cursor-pointer active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                   style={{ minHeight: '44px', background: 'var(--accent)' }}>
-                  Confirm &amp; Queue <ChevronRight size={16} />
+                  Preview result <ChevronRight size={16} />
                 </button>
               </div>
             </>
@@ -266,17 +266,17 @@ function RebalanceWizardModal({ onClose, onComplete }) {
                 <CheckCircle size={28} style={{ color: '#16A34A' }} />
               </div>
               <div>
-                <p className="text-lg font-semibold" style={{ color: C.hi }}>Rebalance queued!</p>
+                <p className="text-lg font-semibold" style={{ color: C.hi }}>Sample rebalance preview</p>
                 <p className="text-sm mt-1" style={{ color: C.mid }}>
-                  4 trades will execute at next market open via Questrade.
+                  This is a simulation. No trades are placed or queued.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { label: 'Trades queued', value: '4' },
-                  { label: 'Capital moved', value: '$4,449' },
-                  { label: 'New cash needed', value: '$0' },
-                  { label: 'Est. completion', value: 'Tomorrow 9:30am' },
+                  { label: 'Sample changes', value: '4' },
+                  { label: 'Illustrative amount', value: '$4,449' },
+                  { label: 'Sample cash needed', value: '$0' },
+                  { label: 'Execution', value: 'Not supported' },
                 ].map(s => (
                   <div key={s.label} className="rounded-xl p-3 text-center" style={{ background: 'var(--bg-subtle)' }}>
                     <p className="text-xs font-medium" style={{ color: C.low }}>{s.label}</p>

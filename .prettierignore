@@ -1,0 +1,19 @@
+node_modules
+dist
+coverage
+playwright-report
+test-results
+package-lock.json
+.claude
+.superpowers
+# Historical evidence and preserved client documents are not formatting targets.
+docs/reference
+docs/rebuild
+docs/superpowers
+PHASE_1_REQUIREMENTS.md
+robo-advisor-proposal.md
+# Untouched legacy screens keep their original diffs reviewable.
+apps/web/src/demo/legacy
+apps/web/src/index.css
+apps/web/public
+apps/web/src/App.css

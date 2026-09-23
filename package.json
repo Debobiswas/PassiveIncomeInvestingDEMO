@@ -1,9 +1,40 @@
 {
-  "devDependencies": {
-    "supabase": "^2.115.0"
+  "name": "passive-income-investing",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "packageManager": "npm@11.13.0",
+  "engines": {
+    "node": ">=24.16.0 <25",
+    "npm": ">=11.13.0 <12"
   },
-  "dependencies": {
-    "@supabase/ssr": "^0.12.4",
-    "@supabase/supabase-js": "^2.112.3"
+  "scripts": {
+    "dev": "npm run dev --workspace=@pii/web",
+    "build": "npm run build --workspace=@pii/web && node scripts/check-build.mjs",
+    "preview": "npm run preview --workspace=@pii/web --",
+    "typecheck": "tsc --project apps/web/tsconfig.json && tsc --project tsconfig.tools.json",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:e2e": "npm run build && playwright test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run format:check && npm run build"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.13.6",
+    "eslint": "10.4.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.2",
+    "globals": "17.6.0",
+    "prettier": "3.9.8",
+    "supabase": "2.115.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.1",
+    "vitest": "5.0.1"
   }
 }

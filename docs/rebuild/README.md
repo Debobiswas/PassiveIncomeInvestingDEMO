@@ -41,7 +41,7 @@ Build M1 first, then prove a persisted manual/CSV portfolio journey. Stabilize s
 
 After shared contracts stabilize, limited M2/catalogue/native work can proceed in parallel under clear ownership. Do not independently build ten feature backends. Reuse review agents for bounded PR verification, not competing architecture decisions.
 
-The first implementation change is F1/F2: reproducible TypeScript workspace and meaningful CI baseline, followed immediately by real routing/identity and an end-to-end persisted journey. The current planning change adds documentation/governance; it does not migrate the app or database.
+F1–F3 implementation is now on `codex/foundation-phase-1`: a root workspace, strict typed shell, CI/test baseline and routed demo isolation. See [implementation evidence and open gates](evidence/F1-F3-foundation.md). This is not M1 acceptance: identity, database isolation, onboarding, monitoring and hosted deployment remain F4–F6. Historical code references in the PRDs identify the audited commits, not current paths.
 
 ## Resolved integration decisions
 

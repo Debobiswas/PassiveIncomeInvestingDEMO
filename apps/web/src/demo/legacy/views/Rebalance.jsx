@@ -13,7 +13,6 @@ const severityStyle = {
 
 function DriftBar({ current, target, color, ticker }) {
   const drift = current - target;
-  const absDrift = Math.abs(drift);
   return (
     <div>
       <div className="flex items-center justify-between text-xs mb-1.5">
@@ -87,7 +86,7 @@ export default function Rebalance() {
       {done && (
         <div className="flex items-center gap-3 px-4 py-3 rounded-xl border" style={{ background: '#DCFCE7', borderColor: '#BBF7D0' }}>
           <CheckCircle size={14} style={{ color: '#16A34A' }} />
-          <span className="text-xs font-semibold" style={{ color: '#16A34A' }}>Rebalance plan applied — trades queued for next market open.</span>
+          <span className="text-xs font-semibold" style={{ color: '#16A34A' }}>Demo plan previewed — no trades placed or queued.</span>
         </div>
       )}
 

@@ -1,17 +1,21 @@
 # Dependencies
 node_modules/
-robo-advisor/node_modules/
 
 # Build output
-robo-advisor/dist/
+dist/
+playwright-report/
+test-results/
+coverage/
 
 # Vite cache
-robo-advisor/.vite/
+.vite/
 
 # Local env files
 .env
 .env.local
 .env.*.local
+.env.*
+!.env.example
 
 # Editor
 .vscode/
